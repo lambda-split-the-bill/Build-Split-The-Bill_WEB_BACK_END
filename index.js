@@ -1,6 +1,6 @@
 require("dotenv").config();
 const server = require("./api/server");
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000;``
 server.get("/", (req, res) => {
   res.send("server is live!");
 });
