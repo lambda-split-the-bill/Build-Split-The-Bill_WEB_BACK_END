@@ -17,9 +17,9 @@ function getById(id) {
     .where({ id })
     .first();
 }
-function getBy(filter) {
+function getBy(username) {
   return Db("users")
-    .where(filter)
+    .where({username})
     .first();
 }
 
