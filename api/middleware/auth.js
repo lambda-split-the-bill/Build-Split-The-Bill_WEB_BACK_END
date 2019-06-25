@@ -19,7 +19,7 @@ module.exports = {
       roles: user.roles_id
     };
     const options = {
-      expiresIn: `24h`
+      expiresIn: `24h`,
     };
     return jwt.sign(payload, secrets.jwtSecret, options);
   },

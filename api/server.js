@@ -1,7 +1,7 @@
 const express = require("express");
 const server = express();
 const serverConfig = require("./serverConfig.js");
-const authRoute = require("./routes/usersRoute");
+const authRoute = require("./routes/usersRouter");
 const { protected } = require("./middleware/auth");
 serverConfig(server);
 
