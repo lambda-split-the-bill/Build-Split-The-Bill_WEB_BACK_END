@@ -3,6 +3,7 @@ const router = express.Router();
 const Users = require("../../data/Models/usersModel");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../middleware/auth");
+router.use(express.json());
 
 router.get("/", async (req, res, next) => {
   try {
@@ -29,7 +30,7 @@ router.get("/", async (req, res, next) => {
 
 router.post('/register', (req, res) => {
   let user = req.body;
-  console.log(user)
+  console.log(req)
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 

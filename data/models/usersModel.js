@@ -17,11 +17,20 @@ function getById(id) {
     .where({ id })
     .first();
 }
-function getBy(filter) {
+// function getBy(filter) {
+//   return db("users")
+//     .where(filter)
+//     .first();
+// }
+
+function getBy(username) {
   return db("users")
-    .where(filter)
+    .where({username})
     .first();
 }
+
+
+
 
 function update(id, user) {
   return db("users")
