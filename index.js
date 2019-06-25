@@ -5,7 +5,7 @@ server.get("/", (req, res) => {
   res.send("server is live!");
 });
 
-server.use(require("./api/middleware.js"));
+server.use(require("./api/middleware/errorHandler"));
 
 server.listen(port, () => {
   console.log(`Server is listening on ${port}`);
