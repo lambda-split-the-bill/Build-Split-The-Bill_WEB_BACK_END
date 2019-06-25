@@ -35,12 +35,13 @@ router.post('/register', (req, res) => {
 
   Users.insert(user)
     .then(saved => {
-      res.status(201).json(saved);
+      res.status(200).json(saved);
     })
     .catch(error => {
       res.status(500).json(error);
     });
 });
+
 
 
 router.post("/login", (req, res) => {
@@ -56,7 +57,7 @@ router.post("/login", (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json(err);
+      res.status(500).json({ err, message: "500 error" });
     });
 });
 
