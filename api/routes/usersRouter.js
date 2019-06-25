@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Users = require("../../data/Models/usersModel");
+const Users = require("../../data/models/usersModel");
 const bcrypt = require("bcryptjs");
 const { generateToken } = require("../middleware/auth");
 router.use(express.json());
