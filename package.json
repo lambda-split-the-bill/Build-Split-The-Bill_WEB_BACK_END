@@ -20,12 +20,14 @@
   },
   "homepage": "https://github.com/vijaydas/Build-Split-The-Bill_WEB_BACK_END#readme",
   "devDependencies": {
-    "cross-env": "^5.2.0",
+    
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   },
   "dependencies": {
+
+    "cross-env": "^5.2.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
