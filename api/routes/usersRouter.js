@@ -40,7 +40,7 @@ router.post('/register', (req, res) => {
       res.status(200).json(saved);
     })
     .catch(error => {
-      res.status(500).json(error);
+      res.status(500).json({ error, message: "500 error in register" });
     });
 });
 
@@ -59,7 +59,7 @@ router.post("/login", (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json({ err, message: "500 error" });
+      res.status(500).json({ err, message: "500 error in login" });
     });
 });
 
