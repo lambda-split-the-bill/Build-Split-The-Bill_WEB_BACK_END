@@ -28,9 +28,9 @@ router.get("/", async (req, res, next) => {
 //   }
 // });
 
-router.post('/register', (req, res) => {
+router.post("/register", (req, res) => {
   let user = req.body;
-  console.log(req)
+  console.log(req);
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 
@@ -39,16 +39,15 @@ router.post('/register', (req, res) => {
       res.status(200).json(saved);
     })
     .catch(error => {
-      res.status(500).json({ error, message: "500 error in register" });
+      console.error(error)
+      res.status(500).json({message: "internal server error"});
     });
 });
-
-
 
 router.post("/login", (req, res) => {
   let { username, password } = req.body;
   Users.getBy(username)
-  .first()
+    .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken(user);
@@ -61,7 +60,5 @@ router.post("/login", (req, res) => {
       res.status(500).json({ err, message: "500 error in login" });
     });
 });
-
-
 
 module.exports = router;

@@ -44,8 +44,8 @@ function remove(id) {
 }
 
 async function insert(user) {
-  const [id] = await db('users').insert(user);
-
+  const [id] = await db('users').insert(user, ["id"]);
+  console.log("id", id)
   return findById(id);
 }
 
