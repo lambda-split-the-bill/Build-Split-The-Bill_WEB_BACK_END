@@ -25,12 +25,9 @@ function getById(id) {
 
 function getBy(username) {
   return db("users")
-    .where({username})
+    .where({ username })
     .first();
 }
-
-
-
 
 function update(id, user) {
   return db("users")
@@ -44,12 +41,17 @@ function remove(id) {
 }
 
 async function insert(user) {
-  const [newUser] = await db('users').insert(user, ["id"]);
-  return findById(newUser.id);
+  if (process.env.NODE_ENV === "production") {
+    const [newUser] = await db("users").insert(user, ["id"]);
+    return findById(newUser.id);
+  } else {
+    const [id] = await db("users").insert(user);
+    return findById(id);
+  }
 }
 
 function findById(id) {
-  return db('users')
+  return db("users")
     .where({ id })
     .first();
 }
