@@ -41,16 +41,16 @@ router.delete("/:id", protected, (req, res) => {
 });
 
 
-server.put('/:id', (req, res) => {
-  const changes = req.body
-  Bills.update(req.params.id, changes)
-  .then(bill => {
-      res.status(200).json(bill)
-  })
-  .catch(error => {
-      res.status(500).json(error)
-  })
-})
+// server.put('/:id', (req, res) => {
+//   const changes = req.body
+//   Bills.update(req.params.id, changes)
+//   .then(bill => {
+//       res.status(200).json(bill)
+//   })
+//   .catch(error => {
+//       res.status(500).json(error)
+//   })
+// })
 
 
 module.exports = router;
