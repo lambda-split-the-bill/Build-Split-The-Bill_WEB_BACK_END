@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Friends = require("../../data/models/friendsModel");
-const bcrypt = require("bcryptjs");
+//const bcrypt = require("bcryptjs");
 const { protected } = require("../middleware/auth");
 router.use(express.json());
 
 router.get("/", async (req, res, next) => {
   try {
-    const users = await Users.get();
+    const users = await Friends.get();
     res.status(200).json(users);
   } catch (err) {
     next(err);

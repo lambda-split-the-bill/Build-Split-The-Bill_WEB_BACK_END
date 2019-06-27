@@ -24,34 +24,34 @@ function getById(id) {
 // }
 
 function getBy(name) {
-  return db("users")
+  return db("friends")
     .where({ name })
     .first();
 }
 
-function update(id, user) {
-  return db("users")
+function update(id, friend) {
+  return db("friends")
     .where({ id })
-    .update(user);
+    .update(friend);
 }
 function remove(id) {
-  return db("users")
+  return db("friends")
     .where({ id })
     .del();
 }
 
-async function insert(user) {
+async function insert(friend) {
   if (process.env.NODE_ENV === "production") {
-    const [newUser] = await db("users").insert(user, ["id"]);
-    return findById(newUser.id);
+    const [newFriend] = await db("friends").insert(friend, ["id"]);
+    return findById(newFriend.id);
   } else {
-    const [id] = await db("users").insert(user);
+    const [id] = await db("friends").insert(friend);
     return findById(id);
   }
 }
 
 function findById(id) {
-  return db("users")
+  return db("friends")
     .where({ id })
     .first();
 }
