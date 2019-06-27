@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", protected, (req, res) => {
   let bill = req.body;
-  Bills.insert(friend)
+  Bills.insert(bill)
     .then(saved => {
       res.status(200).json(saved);
     })
