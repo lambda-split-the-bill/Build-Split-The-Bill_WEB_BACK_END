@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Friends = require("../../data/models/friendsModel");
 //const bcrypt = require("bcryptjs");
-const { protected } = require("../middleware/auth");
+const { myprivate } = require("../middleware/auth");
 router.use(express.json());
 
 router.get("/", async (req, res, next) => {
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", protected, (req, res) => {
+router.post("/", myprivate, (req, res) => {
   let friend = req.body;
   Friends.insert(friend)
     .then(saved => {
@@ -27,7 +27,7 @@ router.post("/", protected, (req, res) => {
 });
 
 
-router.delete("/:id", protected, (req, res) => {
+router.delete("/:id", myprivate, (req, res) => {
   Friends.remove(req.params.id)
     .then(friend => {
       if (friend) {
@@ -41,16 +41,16 @@ router.delete("/:id", protected, (req, res) => {
     });
 });
 
-// server.put('/:id', (req, res) => {
-//   const changes = req.body
-//   Friends.update(req.params.id, changes)
-//   .then(friend => {
-//       res.status(200).json(friend)
-//   })
-//   .catch(error => {
-//       res.status(500).json(error)
-//   })
-// })
+router.put('/:id', (req, res) => {
+  const changes = req.body
+  Friends.update(req.params.id, changes)
+  .then(friend => {
+      res.status(200).json(friend)
+  })
+  .catch(error => {
+      res.status(500).json(error)
+  })
+})
 
 
 module.exports = router;

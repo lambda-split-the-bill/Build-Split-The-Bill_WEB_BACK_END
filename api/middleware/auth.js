@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const secrets = require("../secret");
 
 module.exports = {
-  protected: function(req, res, next) {
+  myprivate: function(req, res, next) {
     const token = req.headers.authorization;
     jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
       if (err) {

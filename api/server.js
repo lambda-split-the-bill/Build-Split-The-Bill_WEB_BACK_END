@@ -4,7 +4,7 @@ const serverConfig = require("./serverConfig.js");
 const authRoute = require("./routes/usersRouter");
 const friendsRouter = require('./routes/friendsRouter');
 const billsRouter = require('./routes/billsRouter');
-const { protected } = require("./middleware/auth");
+//const { private } = require("./middleware/auth");
 
 server.use(express.json());
 serverConfig(server);

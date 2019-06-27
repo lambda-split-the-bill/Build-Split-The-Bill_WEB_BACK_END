@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Bills = require("../../data/models/billsModel");
-const { protected } = require("../middleware/auth");
+const { myprivate } = require("../middleware/auth");
 router.use(express.json());
 
 router.get("/", async (req, res, next) => {
@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", protected, (req, res) => {
+router.post("/", myprivate, (req, res) => {
   let bill = req.body;
   Bills.insert(bill)
     .then(saved => {
@@ -26,7 +26,7 @@ router.post("/", protected, (req, res) => {
 });
 
 
-router.delete("/:id", protected, (req, res) => {
+router.delete("/:id", myprivate, (req, res) => {
   Bills.remove(req.params.id)
     .then(bill => {
       if (bill) {
@@ -41,16 +41,16 @@ router.delete("/:id", protected, (req, res) => {
 });
 
 
-// server.put('/:id', (req, res) => {
-//   const changes = req.body
-//   Bills.update(req.params.id, changes)
-//   .then(bill => {
-//       res.status(200).json(bill)
-//   })
-//   .catch(error => {
-//       res.status(500).json(error)
-//   })
-// })
+router.put('/:id', (req, res) => {
+  const changes = req.body
+  Bills.update(req.params.id, changes)
+  .then(bill => {
+      res.status(200).json(bill)
+  })
+  .catch(error => {
+      res.status(500).json(error)
+  })
+})
 
 
 module.exports = router;
