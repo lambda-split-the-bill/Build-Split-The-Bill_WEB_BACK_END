@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Bills = require("../../data/models/friendsModel");
+const Bills = require("../../data/models/billsModel");
 //const bcrypt = require("bcryptjs");
 const { protected } = require("../middleware/auth");
 router.use(express.json());

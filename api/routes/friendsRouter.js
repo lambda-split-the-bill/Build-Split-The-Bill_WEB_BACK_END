@@ -14,20 +14,6 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// router.post("/register", async (req, res, next) => {
-//   try {
-//     const creds = req.body;
-//     console.log(creds);
-//     //creds.password = bcrypt.hashSync(creds.password, 10);
-//     creds.password = bcrypt.hashSync(creds.password, 10);
-//     const user = await Users.insert(creds);
-//     const token = generateToken(user);
-//     res.status(201).json({ id: user.id, token });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 router.post("/", protected, (req, res) => {
   let user = req.body;
   console.log(req);
