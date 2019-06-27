@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Bills = require("../../data/models/billsModel");
-//const bcrypt = require("bcryptjs");
 const { protected } = require("../middleware/auth");
 router.use(express.json());
 
@@ -14,27 +13,9 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// router.post("/register", async (req, res, next) => {
-//   try {
-//     const creds = req.body;
-//     console.log(creds);
-//     //creds.password = bcrypt.hashSync(creds.password, 10);
-//     creds.password = bcrypt.hashSync(creds.password, 10);
-//     const user = await Users.insert(creds);
-//     const token = generateToken(user);
-//     res.status(201).json({ id: user.id, token });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 router.post("/", protected, (req, res) => {
-  let user = req.body;
-  console.log(req);
-  const hash = bcrypt.hashSync(user.password, 10);
-  user.password = hash;
-
-  Users.insert(user)
+  let bill = req.body;
+  Bills.insert(friend)
     .then(saved => {
       res.status(200).json(saved);
     })
@@ -44,21 +25,20 @@ router.post("/", protected, (req, res) => {
     });
 });
 
-router.post("/login", (req, res) => {
-  let { username, password } = req.body;
-  Users.getBy(username)
-    .first()
-    .then(user => {
-      if (user && bcrypt.compareSync(password, user.password)) {
-        const token = generateToken(user);
-        res.status(200).json({ id: user.id, token });
+
+router.delete("/:id", protected, (req, res) => {
+  Bills.remove(req.params.id)
+    .then(bill => {
+      if (bill) {
+        res.status(200).json(bill);
       } else {
-        res.status(401).json({ message: "invalid creds" });
+        res.status(404).json({ message: 'Bill not found' });
       }
     })
-    .catch(err => {
-      res.status(500).json({ err, message: "500 error in login" });
+    .catch(error => {
+      res.status(500).json(error);
     });
 });
+
 
 module.exports = router;

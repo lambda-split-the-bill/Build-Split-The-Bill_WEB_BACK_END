@@ -16,11 +16,7 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", protected, (req, res) => {
   let friend = req.body;
-  console.log(req);
-  const hash = bcrypt.hashSync(user.password, 10);
-  user.password = hash;
-
-  Users.insert(user)
+  Friends.insert(friend)
     .then(saved => {
       res.status(200).json(saved);
     })
@@ -30,21 +26,20 @@ router.post("/", protected, (req, res) => {
     });
 });
 
-router.post("/login", (req, res) => {
-  let { username, password } = req.body;
-  Users.getBy(username)
-    .first()
-    .then(user => {
-      if (user && bcrypt.compareSync(password, user.password)) {
-        const token = generateToken(user);
-        res.status(200).json({ id: user.id, token });
+
+router.delete("/:id", protected, (req, res) => {
+  Friends.remove(req.params.id)
+    .then(friend => {
+      if (friend) {
+        res.status(200).json(friend);
       } else {
-        res.status(401).json({ message: "invalid creds" });
+        res.status(404).json({ message: 'Friend not found' });
       }
     })
-    .catch(err => {
-      res.status(500).json({ err, message: "500 error in login" });
+    .catch(error => {
+      res.status(500).json(error);
     });
 });
+
 
 module.exports = router;
