@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", protected, (req, res) => {
-  let user = req.body;
+  let friend = req.body;
   console.log(req);
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
