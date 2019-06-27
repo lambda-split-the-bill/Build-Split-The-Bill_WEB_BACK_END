@@ -43,7 +43,7 @@ router.post("/login", (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json({ err, message: "500 error in login" });
+      res.status(500).json({error: err.message, message: "500 error in login" });
     });
 });
 
