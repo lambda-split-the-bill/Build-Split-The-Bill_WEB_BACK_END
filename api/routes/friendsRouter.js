@@ -41,5 +41,16 @@ router.delete("/:id", protected, (req, res) => {
     });
 });
 
+server.put('/:id', (req, res) => {
+  const changes = req.body
+  Friends.update(req.params.id, changes)
+  .then(friend => {
+      res.status(200).json(friend)
+  })
+  .catch(error => {
+      res.status(500).json(error)
+  })
+})
+
 
 module.exports = router;

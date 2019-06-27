@@ -47,4 +47,32 @@ router.post("/login", (req, res) => {
     });
 });
 
+
+router.delete("/:id", (req, res) => {
+  Users.remove(req.params.id)
+    .then(user => {
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+});
+
+
+server.put('/:id', (req, res) => {
+  const changes = req.body
+  Users.update(req.params.id, changes)
+  .then(user => {
+      res.status(200).json(user)
+  })
+  .catch(error => {
+      res.status(500).json(error)
+  })
+})
+
+
 module.exports = router;
