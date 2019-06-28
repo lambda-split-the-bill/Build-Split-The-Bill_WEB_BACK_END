@@ -1,5 +1,9 @@
 const jwt = require("jsonwebtoken");
-const secrets = require("../secret");
+let secrets = require("../secret");
+console.log(secrets);
+secrets = secrets[process.env.NODE_ENV];
+console.log(secrets);
+console.log(process.env.NODE_ENV);
 
 module.exports = {
   myprivate: function(req, res, next) {
